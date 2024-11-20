@@ -161,6 +161,6 @@ def process_folder(root_path):
             logging.info("-------")
 
 
-root_path = "/mnt/6a32262d-10d7-4d1f-afd1-e1a2e3db7aed/Descargas/Split/"
+root_path = ""
 process_folder(root_path)
-print("Final de la ejecución.")
+logging.info("Final de la ejecución.")

@@ -13,20 +13,16 @@ def move_images_by_size(folder_path: str, size_dict: dict, format_choice: str):
                           Ejemplo: {"a3": {"ancho": 3508, "alto": 4961}, "a4": {"ancho": 2480, "alto": 3508}}
         format_choice (str): "a3" o "a4", según el formato que deseas filtrar.
     """
-    # Validar entrada
     if format_choice not in size_dict:
         raise ValueError(f"Formato inválido: {format_choice}. Debe ser 'a3' o 'a4'.")
 
-    # Crear la carpeta de destino
     folder_path = Path(folder_path)
     destination_folder = folder_path / format_choice
     destination_folder.mkdir(exist_ok=True)
 
-    # Obtener las dimensiones mínimas
     min_width = size_dict[format_choice]["ancho"]
     min_height = size_dict[format_choice]["alto"]
 
-    # Extensiones soportadas
     supported_formats = (".avif", ".jpeg", ".jpg", ".png", ".tif", ".tiff", ".webp")
 
     for image_file in folder_path.iterdir():
@@ -34,7 +30,7 @@ def move_images_by_size(folder_path: str, size_dict: dict, format_choice: str):
             try:
                 with Image.open(image_file) as img:
                     width, height = img.size
-                    # Verificar si cumple con las dimensiones mínimas
+                    
                     if width >= min_width and height >= min_height:
                         shutil.move(str(image_file), str(destination_folder / image_file.name))
                         print(f"Movida: {image_file.name} -> {destination_folder}")
@@ -45,7 +41,7 @@ def move_images_by_size(folder_path: str, size_dict: dict, format_choice: str):
 
 
 if __name__ == "__main__":
-    folder = "/ruta/a/tu/carpeta"
+    folder = "/ruta/a/carpeta"
     
     size_requirements = {
         "a3": {"ancho": 3508, "alto": 4961},

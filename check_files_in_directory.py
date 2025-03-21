@@ -11,7 +11,7 @@ def check_files_in_directory(directory):
             file_path = os.path.join(root, file)
             try:
                 with open(file_path, "rb") as f:
-                    f.read(1024)  # Intenta leer una pequeña parte del archivo
+                    f.read(1024)
             except Exception as e:
                 error_count += 1
                 print(f"Error en archivo: {file_path}\n  -> {e}")

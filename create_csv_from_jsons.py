@@ -75,6 +75,6 @@ def jsons_to_csv(folder_path):
     else:
         print("No se encontraron datos válidos para convertir en CSV.")
 
-# Ejecución
+# === Ejecución ===
 folder_path = "carpeta con los archivos json"
 jsons_to_csv(folder_path)

@@ -1,80 +1,87 @@
 import os
 import json
-import pandas as pd
+import csv
+from typing import List, Dict
 
-def jsons_to_csv(folder_path):
+
+def read_json_from_directory(directory: str) -> List[Dict]:
     """
-    Crea un csv a partir de una carpeta con archivos json. Se espera que cada json tenga ciertas keys que se estandarizan a un nuevo nombre.
+    Lee todos los archivos JSON desde un directorio especificado y los convierte en una lista de diccionarios.
+
+    Args:
+        directory (str): Ruta del directorio que contiene archivos JSON.
+
+    Returns:
+        List[Dict]: Lista de diccionarios representando el contenido de los archivos JSON.
     """
-    csv_filename = os.path.join(folder_path, "jsons_to_csv.csv")
-    all_data = []
-    unique_others = set()
+    data = []
+    json_files_read = 0
 
-    column_mapping = {
-        "Produce reacciones de fotosensibilidad. el paciente evitará exponerse a la luz solar.": "PHOTOSENSITIVITY_REACTIONS",
-        "Medicamento peligroso": "DANGEROUS_MEDICATION",
-        "Afecta a la capacidad de conducir": "AFFECTS_DRIVING_ABILITY",
-        "source_url": "SOURCE_URL",
-        "active_ingredient": "ACTIVE_INGREDIENT",
-        "atc": "ATC",
-        "pregnancy": "PREGNANCY",
-        "lactation": "LACTATION",
-        "Mecanismo de acción": "MECHANISM_OF_ACTION",
-        "Indicaciones terapéuticas": "THERAPEUTIC_INDICATIONS",
-        "Posología": "POSOLOGY",
-        "Contraindicaciones": "CONTRAINDICATIONS",
-        "Advertencias y precauciones": "WARNINGS_AND_PRECAUTIONS",
-        "Insuficiencia hepática": "HEPATIC_IMPAIRMENT",
-        "Interacciones": "INTERACTIONS",
-        "Embarazo": "PREGNANCY_DETAILS",
-        "Lactancia": "LACTATION_DETAILS",
-        "Reacciones adversas": "ADVERSE_REACTIONS",
-        "Modo de administración": "ADMINISTRATION_METHOD",
-        "Insuficiencia renal": "RENAL_IMPAIRMENT",
-        "Efectos sobre la capacidad de conducir": "EFFECTS_ON_DRIVING_ABILITY",
-        "Sobredosificación": "OVERDOSAGE",
-        "Indicaciones terapéuticas y Posología": "THERAPEUTIC_INDICATIONS_AND_POSOLOGY",
-        "OBTAINED_DATE": "OBTAINED_DATE"
-    }
-
-    for filename in os.listdir(folder_path):
+    for filename in os.listdir(directory):
         if filename.endswith(".json"):
-            file_path = os.path.join(folder_path, filename)
+            filepath = os.path.join(directory, filename)
             try:
-                with open(file_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    if isinstance(data, dict) and "others" in data:
-                        unique_others.update(data["others"])
-            except Exception as e:
-                print(f"Error procesando {filename}: {e}")
+                with open(filepath, 'r', encoding='utf-8') as file:
+                    content = json.load(file)
+                    if isinstance(content, list):
+                        data.extend(content)
+                    elif isinstance(content, dict):
+                        data.append(content)
+                    json_files_read += 1
+            except json.JSONDecodeError as e:
+                print(f"Error al leer {filename}: {e}")
 
-    for filename in os.listdir(folder_path):
-        if filename.endswith(".json"):
-            file_path = os.path.join(folder_path, filename)
-            try:
-                with open(file_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    row = {key: False for key in unique_others}
+    return data, json_files_read
 
-                    for key, value in data.items():
-                        if key == "others":
-                            for item in value:
-                                row[item] = True
-                        else:
-                            row[column_mapping.get(key, key.upper())] = value
 
-                    all_data.append(row)
-            except Exception as e:
-                print(f"Error procesando {filename}: {e}")
+def write_csv(data: List[Dict], output_path: str) -> int:
+    """
+    Escribe una lista de diccionarios en un archivo CSV.
 
-    if all_data:
-        df = pd.DataFrame(all_data)
-        df.rename(columns=column_mapping, inplace=True)
-        df.to_csv(csv_filename, index=False, encoding="utf-8")
-        print(f"CSV creado con éxito en: {csv_filename}")
+    Args:
+        data (List[Dict]): Lista de diccionarios a escribir.
+        output_path (str): Ruta del archivo CSV de salida.
+
+    Returns:
+        int: Número de filas escritas en el archivo CSV.
+    """
+    if not data:
+        print("No hay datos para escribir en el CSV.")
+        return 0
+
+    fieldnames = sorted({key for item in data for key in item.keys()})
+
+    with open(output_path, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
+
+    return len(data)
+
+
+def jsons_to_csv(json_dir: str) -> None:
+    """
+    Convierte todos los archivos JSON de un directorio en un único archivo CSV.
+    El archivo CSV generado se guarda en el mismo directorio, con prefijo "__" para visibilidad.
+
+    Args:
+        json_dir (str): Ruta del directorio que contiene los archivos JSON.
+    """
+    data, num_files = read_json_from_directory(json_dir)
+    output_csv_path = os.path.join(json_dir, "__jsons_to_csv.csv")
+    num_rows = write_csv(data, output_csv_path)
+
+    print(f"\nResumen:")
+    print(f" - Archivos JSON leídos: {num_files}")
+    print(f" - Filas escritas en el CSV: {num_rows}")
+    print(f" - Archivo generado: {output_csv_path}")
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) != 2:
+        print("Uso: python script.py <directorio_con_jsons>")
     else:
-        print("No se encontraron datos válidos para convertir en CSV.")
-
-# === Ejecución ===
-folder_path = "carpeta con los archivos json"
-jsons_to_csv(folder_path)
+        jsons_to_csv(sys.argv[1])

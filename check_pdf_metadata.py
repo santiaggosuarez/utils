@@ -2,10 +2,10 @@ import PyPDF2
 
 def check_pdf_metadata(pdf_path):
     """
-    Checks if a PDF file contains metadata and prints the metadata if available.
-
+    Comprueba si un archivo PDF contiene metadatos y los imprime si están disponibles.
+    
     Args:
-        pdf_path (str): The path to the PDF file to check for metadata.
+        pdf_path (str): Ruta del archivo PDF para comprobar los metadatos.
     """
     try:
         with open(pdf_path, "rb") as file:

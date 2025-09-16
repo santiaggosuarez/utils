@@ -13,7 +13,6 @@ def encontrar_falsos_pdfs(directorio):
     
     return falsos_pdfs
 
-# Usar así:
 falsos = encontrar_falsos_pdfs("/ruta/a/tus/archivos")
 for falso in falsos:
     print(f"Archivo falso PDF: {falso}")

@@ -1,18 +1,18 @@
 import os
 from pathlib import Path
 
-def encontrar_falsos_pdfs(directorio):
+def find_fake_pdfs(directory):
     """
-    Encuentra todos los archivos con extensión .pdf que no son PDFs reales
+    Finds all files with a .pdf extension that are not real PDF files
     """
-    falsos_pdfs = []
+    fake_pdfs = []
     
-    for archivo in Path(directorio).rglob("*.pdf"):
-        if not es_pdf_real(archivo):
-            falsos_pdfs.append(str(archivo))
+    for file in Path(directory).rglob("*.pdf"):
+        if not is_real_pdf(file):
+            fake_pdfs.append(str(file))
     
-    return falsos_pdfs
+    return fake_pdfs
 
-falsos = encontrar_falsos_pdfs("/ruta/a/tus/archivos")
-for falso in falsos:
-    print(f"Archivo falso PDF: {falso}")
+fakes = find_fake_pdfs("/path/to/your/files")
+for fake in fakes:
+    print(f"Fake PDF file: {fake}")

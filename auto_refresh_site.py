@@ -8,7 +8,7 @@ options = webdriver.ChromeOptions()
 options.add_argument("--start-maximized")
 
 driver = webdriver.Chrome(service=Service(CHROMEDRIVER_PATH))
-driver.get("https://www.google.com"
+driver.get("https://www.google.com")
 time.sleep(120)
            
 try:

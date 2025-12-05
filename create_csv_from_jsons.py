@@ -35,13 +35,8 @@ def jsonl_to_csv(jsonl_file_path):
             print(f"    ⚠️  Archivo vacío: {jsonl_file_path.name}")
             return False
         
-        # Convertir a DataFrame
         df = pd.DataFrame(data)
-        
-        # Crear archivo de salida (misma ruta, extensión .csv)
         output_file = jsonl_file_path.with_suffix('.csv')
-        
-        # Guardar como CSV
         df.to_csv(output_file, index=False, encoding='utf-8')
         
         print(f"    ✅ Convertido: {len(data)} filas → {output_file.name}")
@@ -65,7 +60,6 @@ def process_folder(folder_path):
     print("📂 Incluyendo subcarpetas...")
     print("-" * 60)
     
-    # Estadísticas
     stats = {
         'total_folders': 0,
         'jsonl_files': 0,
@@ -73,7 +67,6 @@ def process_folder(folder_path):
         'failed_conversions': 0
     }
     
-    # Buscar archivos JSONL en todas las subcarpetas
     jsonl_extensions = ['.jsonl', '.jsonlines', '.jl']
     
     for root, dirs, files in os.walk(folder_path):
@@ -95,7 +88,6 @@ def process_folder(folder_path):
                 else:
                     stats['failed_conversions'] += 1
     
-    # Mostrar estadísticas finales
     print("=" * 60)
     print("📊 ESTADÍSTICAS FINALES")
     print("=" * 60)

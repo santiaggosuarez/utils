@@ -14,5 +14,6 @@ def find_fake_pdfs(directory):
     return fake_pdfs
 
 fakes = find_fake_pdfs("/path/to/your/files")
+
 for fake in fakes:
     print(f"Fake PDF file: {fake}")

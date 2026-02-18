@@ -102,13 +102,11 @@ juego_adivinanza()
 """
 Muestra de lo arrojado en consola:
 
-
     **************************************
     *   JUEGO DE ADIVINANZAS TECHGAMES   *
     *                                    *
     *  ¡Adivina el número secreto!       *
     **************************************
-    
 
 Configuración del juego:
 Ingresa el número MÍNIMO del rango: 1

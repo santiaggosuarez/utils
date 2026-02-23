@@ -17,7 +17,6 @@ def jsonl_to_csv(jsonl_file_path):
     Convierte un archivo JSONL a CSV
     """
     try:
-        # Leer el archivo JSONL
         data = []
         with open(jsonl_file_path, 'r', encoding='utf-8') as file:
             for line_num, line in enumerate(file, 1):

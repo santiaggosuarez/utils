@@ -355,7 +355,7 @@ def process_folder(parent_folder_path, detection_method, model_path):
 
 
 if __name__ == "__main__":
-    # Ejecución SS:
+    # Ejecución:
     # python3 src/main/python/crawlers/face_detection.py --method "dlib" --model src/main/resources/shape_predictor_68_face_landmarks_dlib.dat --folder 
     # python3 src/main/python/crawlers/face_detection.py --method "mediapipe" --model src/main/resources/face_landmarker_mediapipe.task --folder 
     

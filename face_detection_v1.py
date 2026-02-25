@@ -11,15 +11,16 @@ from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 from utils import setup_logging, download_json
 
-HIGH_ROLL_THRESHOLD = 100000 # Actualmente el Roll no es importante para la posición de rostro que se pretende evitar 
+# Actualmente el Roll no es importante para la posición de rostro que se pretende evitar 
+HIGH_ROLL_THRESHOLD = 100000
 HIGH_YAW_THRESHOLD = 1
 HIGH_PITCH_THRESHOLD = 11
 
-MEDIUM_ROLL_THRESHOLD = 100000 # Actualmente el Roll no es importante para la posición de rostro que se pretende evitar 
+MEDIUM_ROLL_THRESHOLD = 100000
 MEDIUM_YAW_THRESHOLD = 7
 MEDIUM_PITCH_THRESHOLD = 16
 
-LOW_ROLL_THRESHOLD = 100000 # Actualmente el Roll no es importante para la posición de rostro que se pretende evitar 
+LOW_ROLL_THRESHOLD = 100000
 LOW_YAW_THRESHOLD = 12
 LOW_PITCH_THRESHOLD = 19
 

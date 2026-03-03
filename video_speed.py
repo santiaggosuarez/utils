@@ -114,6 +114,5 @@ def main() -> None:
 
     print(f"Video generado: {output_path}")
 
-
 if __name__ == "__main__":
     main()

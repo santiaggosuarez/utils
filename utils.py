@@ -85,5 +85,3 @@ def get_driver(options_configurations: Dict[str, Any], mode: str = "headless") -
 
     except Exception:
         logging.exception("Error initializing Chrome driver")
-
-        logging.exception("Error initializing Chrome driver")

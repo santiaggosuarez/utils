@@ -82,6 +82,5 @@ def get_driver(options_configurations: Dict[str, Any], mode: str = "headless") -
         service = Service(chromedriver_path)
 
         return webdriver.Chrome(service=service, options=options)
-
     except Exception:
         logging.exception("Error initializing Chrome driver")

@@ -58,7 +58,6 @@ def juego_adivinanza():
 
 juego_adivinanza()
 
-
 """
 Muestra de la salida en consola:
 

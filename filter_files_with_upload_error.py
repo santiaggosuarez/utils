@@ -1,14 +1,12 @@
 import os
 import shutil
 
-
 def extraer_uploading_strings(ruta):
    """
    Función que recibe un archivo y busca si alguna línea comienza con el string "Uploading".
    Si se encuentra, extrae el texto entre "Uploading " y " ..." y lo agrega a un conjunto.
    """
    uploading_set = set()
-
 
    with open(ruta, 'r', encoding='utf-8') as archivo:
        for linea in archivo:
@@ -27,8 +25,6 @@ def extraer_uploading_strings(ruta):
 
 
    return uploading_set
-
-
 
 
 def mover_archivos_problematicos(ruta_base, rutas_problematicas):
@@ -77,8 +73,6 @@ def mover_archivos_problematicos(ruta_base, rutas_problematicas):
 
 
    print(f"Total de archivos problemáticos movidos: {archivos_movidos}")
-
-
 
 
 def procesar_logs_y_mover_archivos(ruta_general):

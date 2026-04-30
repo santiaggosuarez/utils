@@ -4,6 +4,7 @@ Herramienta simple para cambiar la velocidad de reproducción de un video usando
 Uso:
     python video_speed.py /ruta/al/video.mp4 x1.5
 """
+
 from __future__ import annotations
 
 import argparse

@@ -17,4 +17,5 @@ def extract_files(folder_path, extensions):
 # Usage example
 folder_path = "/path/to/folder"
 extensions = [".tar", ".tar.gz"]
+
 extract_files(folder_path, extensions)

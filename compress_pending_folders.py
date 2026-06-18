@@ -160,7 +160,6 @@ def process_folder(root_path):
             split_targz_folder(full_path, targz_basename, 1, 20000)
             logging.info("-------")
 
-
 root_path = ""
 process_folder(root_path)
 logging.info("Final de la ejecución.")

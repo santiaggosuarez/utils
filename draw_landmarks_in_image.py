@@ -36,4 +36,3 @@ if __name__ == "__main__":
     bbox = (25, 45, 50, 50)  # Ejemplo de coordenadas del bounding box
 
     draw_landmarks(image_path, landmarks, bbox)
-

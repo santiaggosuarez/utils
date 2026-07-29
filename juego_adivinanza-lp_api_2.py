@@ -8,7 +8,6 @@ def juego_adivinanza():
     *  ¡Adivina el número secreto!       *
     **************************************
     """)
-    
     while True:
         try:
             print("\nConfiguración del juego:")

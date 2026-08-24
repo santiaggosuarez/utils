@@ -1,6 +1,3 @@
-"""
-  Función para definir si una imagen es NSFW utilizando transformers.
-"""
 import logging
 from PIL import Image
 from transformers import pipeline

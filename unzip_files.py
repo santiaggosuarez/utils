@@ -14,7 +14,6 @@ def extract_files(folder_path, extensions):
                except Exception as e:
                    print(f"Error extracting '{file_path}': {e}")
 
-# Usage example
 folder_path = "/path/to/folder"
 extensions = [".tar", ".tar.gz"]
 

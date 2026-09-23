@@ -43,8 +43,7 @@ def find_mp4_videos_and_codecs(directory):
     return video_codecs
 
 if __name__ == "__main__":
-    # Ruta del directorio a escanear
-    directory_path = "/mnt/6a32262d-10d7-4d1f-afd1-e1a2e3db7aed/test_distancias/test1/"
+    directory_path = "ruta/a/escanear"
     video_codecs = find_mp4_videos_and_codecs(directory_path)
 
     for video, codec in video_codecs.items():

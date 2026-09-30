@@ -1,6 +1,3 @@
-"""
-  Dada la ruta a una carpeta, cuenta e imprime la cantidad de videos, segundos totales y frames totales encontrados.
-"""
 import cv2
 import os
 

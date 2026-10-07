@@ -13,7 +13,6 @@ def find_person_in_csv(file_path, person_name):
             row_number += 1 
     return "NO PERSON", None
 
-# Uso de la función
 file_path = ''
 list_person_name = [
 

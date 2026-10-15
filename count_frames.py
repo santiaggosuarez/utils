@@ -1,6 +1,8 @@
 import cv2
 import os
 
+SUPPORTED_FORMATS = ('.mp4', '.avi', '.mov', '.mkv', '.flv', '.wmv')  # Añade más formatos si es necesario
+
 def calculate_total_video_duration(directory):
   """
     Dada la ruta a una carpeta, cuenta e imprime la cantidad de videos, segundos totales y frames totales encontrados.
@@ -8,7 +10,7 @@ def calculate_total_video_duration(directory):
     total_seconds = 0
     total_frames = 0
     video_count = 0
-    supported_formats = ('.mp4', '.avi', '.mov', '.mkv', '.flv', '.wmv')  # Añade más formatos si es necesario
+    supported_formats = SUPPORTED_FORMATS
 
     for root, dirs, files in os.walk(directory):
         for file in files:

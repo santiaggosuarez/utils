@@ -26,7 +26,6 @@ def check_files_in_directory(directory, check_content=False, delete_errors=False
         'grandparent_folders_with_errors': set()
     }
 
-    # Configurar mimetypes para mayor precisión
     mimetypes.init()
     
     for root, _, files in os.walk(directory):
@@ -35,17 +34,14 @@ def check_files_in_directory(directory, check_content=False, delete_errors=False
             stats['total_files'] += 1
             
             try:
-                # Verificación básica del archivo
                 with open(file_path, 'rb') as f:
-                    header = f.read(1024)  # Leer cabecera para verificación básica
+                    header = f.read(1024)
                     
                     if not header:
                         raise IOError("Archivo vacío o corrupto")
                 
-                # Detección del tipo de archivo
                 mime_type, _ = mimetypes.guess_type(file_path)
                 
-                # Verificación específica según tipo de archivo
                 if mime_type:
                     if mime_type == 'application/pdf':
                         stats['pdf_files'] += 1
@@ -69,7 +65,6 @@ def check_files_in_directory(directory, check_content=False, delete_errors=False
                 }
                 stats['error_details'].append(error_info)
                 
-                # Extraer y almacenar la carpeta abuela
                 path_parts = os.path.normpath(file_path).split(os.sep)
                 if len(path_parts) >= 3:
                     grandparent_folder = path_parts[-3]
@@ -79,7 +74,6 @@ def check_files_in_directory(directory, check_content=False, delete_errors=False
                 print(f"  Tipo: {mime_type if mime_type else 'Desconocido'}")
                 print(f"  Error: {e}")
                 
-                # Eliminar archivo si se solicita
                 if delete_errors:
                     try:
                         os.remove(file_path)
@@ -98,7 +92,6 @@ def check_files_in_directory(directory, check_content=False, delete_errors=False
     if delete_errors:
         print(f"Archivos eliminados: {stats['deleted_files']}")
     
-    # Mostrar carpetas abuelas con errores
     if stats['grandparent_folders_with_errors']:
         print("\nCarpetas abuelas que contienen archivos con errores:")
         for folder in sorted(stats['grandparent_folders_with_errors']):
@@ -128,7 +121,6 @@ def verify_image(file_path):
     except Exception as e:
         raise Exception(f"Error en imagen: {str(e)}")
 
-# Ejemplo de uso
 if __name__ == "__main__":
     import argparse
     

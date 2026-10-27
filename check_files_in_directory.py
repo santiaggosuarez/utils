@@ -140,7 +140,6 @@ if __name__ == "__main__":
         delete_errors=args.delete_errors
     )
     
-    # Guardar resultados en un archivo
     with open("verificacion_archivos.log", "w") as log_file:
         log_file.write("Resultados de verificación de archivos:\n\n")
         log_file.write(f"Directorio verificado: {args.ruta}\n")
